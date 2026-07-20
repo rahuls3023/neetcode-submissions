@@ -35,8 +35,15 @@ public://optimal approach-> using deque
             }
 
 
-            //step-2> remove all smaller elements from back
-            // we r removing from back only why not from front because as approach me front me jo hoga wo us window ka maximum hoga agar hum front se hi remove kr dege to maximum loss ho jayega, isiye back se.
+            // Step-2: Remove all smaller elements from the back.
+            //
+            // We remove from the back because if nums[i] is greater than them,
+            // those smaller elements can never become the maximum while nums[i]
+            // remains inside the current window.
+            //
+            // We do NOT remove from the front because the front always stores
+            // the maximum element of the current window. Removing it unnecessarily
+            // would lose the current maximum.aximum loss ho jayega, isiye back se.
             while(!dq.empty() && nums[dq.back()]<nums[i]){
                 dq.pop_back();
             }
