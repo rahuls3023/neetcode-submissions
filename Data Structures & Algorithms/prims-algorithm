@@ -1,1 +1,83 @@
+class Solution {
+public:
+    int spanningTree(int V, vector<vector<int>>& edges) {
 
+        // Adjacency list:
+        // adj[u] stores pairs of {neighbour, edgeWeight}
+        vector<vector<pair<int, int>>> adj(V);
+
+        // Build adjacency list from the given edge list
+        for (auto& edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int wt = edge[2];
+
+            // Prim's algorithm works on an undirected graph
+            adj[u].push_back({v, wt});
+            adj[v].push_back({u, wt});
+        }
+
+        // Min heap storing {edgeWeight, node}
+        //
+        // The edge with minimum weight will be processed first
+        priority_queue<
+            pair<int, int>,
+            vector<pair<int, int>>,
+            greater<pair<int, int>>
+        > pq;
+
+        // mst[node] = true means the node has already
+        // been included in the Minimum Spanning Tree
+        //
+        // This array prevents a node from being included twice,
+        // which also prevents cycles
+        vector<bool> mst(V, false);
+
+        // Start from node 0
+        //
+        // Weight is 0 because no edge is required
+        // to include the starting node
+        pq.push({0, 0});
+
+        int totalWeight = 0;
+
+        while (!pq.empty()) {
+
+            // Get the minimum-weight edge from the heap
+            int wt = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+
+            // The same node may be present in the heap
+            // through multiple different edges
+            //
+            // If it is already included in MST,
+            // ignore this heap entry to prevent a cycle
+            if (mst[node]) {
+                continue;
+            }
+
+            // Include the current node in MST
+            mst[node] = true;
+
+            // Add the selected edge weight
+            // For the starting node, the weight is 0
+            totalWeight += wt;
+
+            // Explore all neighbours of the current node
+            for (auto& neighbour : adj[node]) {
+
+                int nextNode = neighbour.first;
+                int edgeWeight = neighbour.second;
+
+                // Push an edge only when its destination node
+                // has not already been included in MST
+                if (!mst[nextNode]) {
+                    pq.push({edgeWeight, nextNode});
+                }
+            }
+        }
+
+        return totalWeight;
+    }
+};
