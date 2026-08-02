@@ -2,7 +2,7 @@ class Solution {
 public://greedy
     int jump(vector<int>& nums) {
         int maxDistance=0;
-        int currentDistance=0;//maximum we can reach from current range
+        int currentDistance=0;//maximum we can reach from current range.
         int jumps=0;
 
         for(int i=0;i<nums.size()-1;i++){//exclude the last element
