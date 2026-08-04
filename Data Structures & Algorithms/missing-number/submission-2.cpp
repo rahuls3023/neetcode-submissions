@@ -1,5 +1,5 @@
 class Solution {
-public://approach-3> using xor using 2 loop
+public://approach-3> using xor using 2 loop.
     int missingNumber(vector<int>& nums) {
         int n=nums.size();
         int xorvalue=0;
