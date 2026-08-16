@@ -1,5 +1,5 @@
 class Solution {
-public://brute force
+public://brute force--> O(N^2*L^2),, L is length of word
     vector<string> stringMatching(vector<string>& words) {
         vector<string>ans;
         int n=words.size();
