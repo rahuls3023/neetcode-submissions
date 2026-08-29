@@ -8,7 +8,7 @@ public://memoisation
 
         if(dp[index]!=-1) return dp[index];
 
-        //we can choose the characters in group of 1 or in 2
+        //we can choose the characters in group of 1 or in 2.
 
         int takeOne=0;
         takeOne+=memoisation(index+1,s,dp);
