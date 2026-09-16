@@ -1,6 +1,6 @@
 class MyHashSet {
 public:
-    //optimal approach-> using list
+    //optimal approach-> using list.
     vector<list<int>>buckets;//no {key,value}pair , only key exists here
     int size=10000;
     MyHashSet() {
